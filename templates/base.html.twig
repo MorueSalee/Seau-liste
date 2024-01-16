@@ -1,17 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+        <title>{% block title %} Seau-Liste {% endblock %}</title>
+        <link rel="icon" href="{{ asset('icons/favicon.png') }}">
+        <link rel="stylesheet" href="{{ asset('css/font.css') }}">
 
-        {% block javascripts %}
-{% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
+        {% block stylesheets %}{% endblock %}
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Clicker+Script&display=swap" rel="stylesheet">
+
+        <style>
+            body {cursor: url('/public/icons/nat915.gif'), auto}
+        </style>
+
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body>
-        {% block body %}{% endblock %}
+
+    <body class="bg-gradient-to-r from-blue-200 to-purple-200 h-screen" style="cursor: url('/public/icons/nat915.gif'), auto">
+            <div>
+                {% block header %}
+                    {{ include('main/navbar.html.twig') }}
+                {% endblock %}
+            </div>
+
+
+
+            <div class="flex flex-col items-center justify-center m-4 ">
+                <div class="flex flex-col gap-2">
+                    {% for label, messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="alert-{{ label }} flex justify-center text-2xl text-white font-bold bg-pink-400 border-2 border-blue-400 rounded-full p-2">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+                {% block body %}{% endblock %}
+            </div>
+
+            <div class="absolute sticky bottom-0">
+                {% block footer %}
+                    {{ include('main/footer.html.twig') }}
+                {% endblock %}
+            </div>
+            {% block javascript %}{% endblock %}
     </body>
 </html>

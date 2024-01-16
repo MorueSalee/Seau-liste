@@ -1,10 +1,60 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="flex flex-col items-center gap-10">
+
+        <div class="flex justify-center text-6xl text-blue-400 font-bold bg-white border-8 border-pink-400 rounded-3xl p-4">
+            <h1>Ajouter un souhait</h1>
+        </div>
+
+        <div class="inline-flex gap-20">
+            <div class="place-items-center">
+                <img class=" rounded-3xl flex flex-grow-0" src="{{ asset('images/unicorn-icegif-15.gif') }}" alt="licorne belle" width="350">
+
+            </div>
+
+            {{ form_start(wishForm) }}
+            <div class="flex flex-col text-4xl text-blue-400 bg-white border-8 border-pink-400 rounded-3xl p-4 gap-4">
+
+                <div class="flex flex-col gap-4">
+                    <div class="flex flex-col gap-2">
+                        {{ form_label(wishForm.title) }}
+                        {{ form_widget(wishForm.title, {'attr': {'class': 'border-2 border-blue-400 rounded-xl'}}) }}
+                        {{ form_errors(wishForm.title) }}
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        {{ form_label(wishForm.description) }}
+                        {{ form_widget(wishForm.description, {'attr': {'class': 'border-2 border-blue-400 rounded-xl'}}) }}
+                        {{ form_errors(wishForm.description) }}
+
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        {{ form_label(wishForm.author) }}
+                        {{ form_widget(wishForm.author, {'attr': {'class': 'border-2 border-blue-400 rounded-xl', 'placeholder': app.user.username}}) }}
+                        {{ form_errors(wishForm.author) }}
+
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        {{ form_label(wishForm.category) }}
+                        {{ form_widget(wishForm.category, {'attr': {'class': 'border-2 border-blue-400 rounded-xl'}}) }}
+                        {{ form_errors(wishForm.category) }}
+
+                    </div>
+                </div>
+
+                <button class="bg-pink-400 text-white border-4 border-blue-400 rounded-3xl p-2 font-bold">Envoyer !</button>
+            </div>
+
+            {{ form_end(wishForm) }}
+        </div>
+
+
+
+    </div>
 
 {% endblock %}
 
 {% block title %}
-
+    {{ parent() }} - Ajouter
 {% endblock %}
 

@@ -21,6 +21,43 @@ class WishRepository extends ServiceEntityRepository
         parent::__construct($registry, Wish::class);
     }
 
+    /**
+     * QueryBuilder
+     */
+    public function search(string $keyword,array $conditions): array{
+        $qb = $this->createQueryBuilder("t");
+
+        $flag = false;
+        foreach( $conditions as $key => $val ){
+            if($val){
+                $qb->orWhere("t.$key LIKE :keyword");
+                $flag=true;
+            }
+        }
+
+        if($flag){
+            $qb->setParameter('keyword','%'.$keyword.'%')
+                ->addOrderBy('t.dateCreated', 'DESC');
+
+        }
+        $query = $qb->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function pagination(int $page): array
+    {
+        $size = 10;
+        $first = ($page - 1) * $size;
+        $qb = $this->createQueryBuilder('t')
+            ->setFirstResult($first)
+            ->setMaxResults($size)
+            ->addOrderBy('t.dateCreated', 'DESC')
+            ->where('t.isPublished = 1');
+
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Wish[] Returns an array of Wish objects
 //     */

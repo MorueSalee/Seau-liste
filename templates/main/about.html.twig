@@ -1,10 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{ parent() }} - Home {% endblock %}
+{% block title %} {{ parent() }} - A propos {% endblock %}
 
 {% block body %}
-    <div class="flex justify-center p-10">
-        <h1 class="flex justify-center text-6xl place-content-center">Bienvenue les chatons ! 😻 </h1>
+        <div class="flex flex-col items-center justify-center text-6xl gap-2">
+            <h1 class="flex justify-center text-blue-400 font-bold bg-white border-8 border-pink-400 rounded-3xl p-4">
+                Les facilitateurs de cette beauté numérique :
+            </h1>
+            {% for user in teamData %}
+                <div class="flex flex-col justify-center gap-2 m-2 p-4 bg-white border-8 rounded-3xl border-pink-400" style="width: 800px">
 
-    </div>
+                    <div class="flex justify-center">
+                        <img class="rounded-full" src="{{ user.picture }}" alt="{{ user.firstname }} {{ user.lastname }}" width="100">
+                    </div>
+
+                    <h2 class="flex justify-center text-5xl text-blue-400">
+                        {{ user.firstname }} {{ user.lastname }} {{ user.firstname=='Fabien'?'❤':'' }}
+                    </h2>
+
+                    <div class="flex justify-center text-4xl">
+                        A créé {{ user.creatorOf }}
+                    </div>
+
+                    <div class="flex justify-center text-2xl">
+                        Né le {{ user.dateOfBirth | date('d-m-Y') }}. {{ user.description }}
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
 {% endblock %}

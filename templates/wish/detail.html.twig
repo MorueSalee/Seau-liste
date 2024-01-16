@@ -5,6 +5,33 @@
 {% endblock %}
 
 {% block body %}
+    <div class="flex justify-center items-center gap-20 p-4">
+
+        <img src="{{ asset('images/unicorn-gif-4.gif') }}" class="rounded-3xl">
+
+        <div class="flex flex-col items-center gap-6 text-6xl p-4 bg-white border-8 border-pink-400 rounded-3xl w-1/2">
+
+            <h1 class="flex items-center justify-center text-blue-400">
+                {{ wish.title }}
+            </h1>
+
+            <p class="flex justify-center text-3xl">
+                Catégorie : {{ wish.category.name }}
+            </p>
+
+            <p class="flex justify-center text-4xl">
+                {{ wish.description }}
+            </p>
+
+            <div class="flex items-end justify-end ">
+                <span class=" text-2xl italic">
+                    Par {{ wish.author }}, le {{ wish.dateCreated | date('d/m/y H:i') }}
+                </span>
+            </div>
+
+        </div>
+    </div>
+
 
 {% endblock %}
 
