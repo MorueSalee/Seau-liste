@@ -39,7 +39,10 @@ security:
     access_control:
          - { path: ^/wish/add, roles: ROLE_USER }
          - { path: ^/wish/edit, roles: ROLE_USER }
-         - { path: ^/wish/delete, roles: ROLE_USER }
+         - { path: ^/wish/delete, roles: ROLE_ADMIN }
+         - { path: ^/user/new, roles: ROLE_ADMIN }
+         - { path: ^/user/edit, roles: ROLE_USER }
+         - { path: ^/wish/delete, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:

@@ -30,7 +30,7 @@
                     </div>
                     <div class="flex flex-col gap-2">
                         {{ form_label(wishForm.author) }}
-                        {{ form_widget(wishForm.author, {'attr': {'class': 'border-2 border-blue-400 rounded-xl', 'placeholder': app.user.username}}) }}
+                        {{ form_widget(wishForm.author, {'attr': {'class': 'border-2 border-blue-400 rounded-xl', 'value': app.user.username}}) }}
                         {{ form_errors(wishForm.author) }}
 
                     </div>

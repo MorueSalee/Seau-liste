@@ -36,7 +36,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $surname = null;
 
-    #[ORM\Column(type: Types::TEXT, unique: true)]
+    #[ORM\Column(length: 180, unique: true)]
     private ?string $username = null;
 
     public function getId(): ?int

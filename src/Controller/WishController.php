@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Wish;
 use App\Form\WishType;
 use App\Repository\WishRepository;
+use App\Service\Censurator;
 use Doctrine\ORM\EntityManagerInterface;
 use \Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,7 +39,7 @@ class WishController extends AbstractController
         return $this->render('wish/list.html.twig', compact('data', 'lastPage', 'page'));
     }
     #[Route('/add', name: 'add')]
-    public function add(Request $request, EntityManagerInterface $em): Response
+    public function add(Request $request, EntityManagerInterface $em, Censurator $censurator): Response
     {
         $wish = new Wish();
         $wishForm = $this->createForm(WishType::class, $wish);
@@ -48,6 +49,8 @@ class WishController extends AbstractController
         if ($wishForm->isSubmitted() && $wishForm->isValid()){
             $wish->setIsPublished(true);
             $wish->setDateCreated(new \DateTime('now'));
+
+            $wish->setDescription($censurator->purify($wish->getDescription()));
 
             $em->persist($wish);
             $em->flush();
